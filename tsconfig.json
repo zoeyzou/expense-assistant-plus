@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
     "outDir": "build/",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es5",
     "lib": ["es6", "dom"],
     "sourceMap": true,
-    "allowJs": true,
+    "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
-    "rootDir": "src",
     "noEmit": true,
     "strict": true,
     "noImplicitAny": true,
@@ -16,5 +15,6 @@
     "isolatedModules": true,
     "esModuleInterop": true
   },
-  "exclude": ["node_modules", "build", "scripts", "webpack"]
+  "include": ["./src"],
+  "exclude": ["node_modules"]
 }
