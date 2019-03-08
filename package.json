@@ -30,6 +30,8 @@
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.8.2",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "tslint": "^5.13.1",
+    "typescript": "^3.3.3333"
   }
 }
