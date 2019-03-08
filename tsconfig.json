@@ -9,15 +9,12 @@
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "src",
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
+    "noEmit": true,
+    "strict": true,
     "noImplicitAny": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "isolatedModules": true,
+    "esModuleInterop": true
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "webpack",
-  ],
+  "exclude": ["node_modules", "build", "scripts", "webpack"]
 }
