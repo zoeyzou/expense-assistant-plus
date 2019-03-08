@@ -1,0 +1,29 @@
+{
+  "name": "expense-assistant-plus",
+  "version": "0.0.1",
+  "description": "This is a hobby project practising react+redux+typescript.",
+  "main": "index.tsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoeyzou/expense-assistant-plus.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "typescript",
+    "styled-components"
+  ],
+  "author": "Zoey Zou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zoeyzou/expense-assistant-plus/issues"
+  },
+  "homepage": "https://github.com/zoeyzou/expense-assistant-plus#readme",
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  }
+}
