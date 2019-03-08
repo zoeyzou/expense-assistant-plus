@@ -1,41 +1,45 @@
-const merge = require('webpack-merge');
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const parts = require('./webpack.parts');
+module.exports = env => {
+  const isProduction = env === 'production';
 
-const PATHS = {
-  app: path.join(__dirname, 'src'),
-  build: path.join(__dirname, 'dist'),
-};
+  return {
+    mode: isProduction ? 'production' : 'development',
+    entry: './src/index.tsx',
+    output: {
+      filename: '[name].js',
+      path: __dirname + '/build',
+    },
 
-const commonConfig = merge([
-  {
-    entry: PATHS.app,
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.json'],
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: ['babel-loader'],
+        },
+      ],
+    },
+
+    devServer: {
+      stats: 'errors-only',
+      open: true,
+      overlay: true,
+    },
+
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+    },
+
     plugins: [
       new HtmlWebpackPlugin({
         template: 'public/index.html',
       }),
     ],
-    resolve: {
-      extensions: ['.ts', '.tsx', 'js', 'json'],
-    },
-  },
-]);
-
-const productionConfig = merge([
-  {
-    output: {
-      path: PATHS.build,
-    },
-  },
-]);
-
-const developmentConfig = merge([parts.devServer()]);
-
-module.exports = mode => {
-  if (mode === 'production') {
-    return merge(commonConfig, productionConfig, { mode });
-  }
-  return merge(commonConfig, developmentConfig, { mode });
+  };
 };
