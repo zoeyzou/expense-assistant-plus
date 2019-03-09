@@ -1,4 +1,5 @@
-import { createGlobalStyle } from "./styled-components";
+import { createGlobalStyle } from './styled-components';
+import { theme } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
   html, body, div#root {
@@ -10,7 +11,8 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
   }
   body {
-    font-size: 1.5rem;
+    font-size: ${theme.fontSize.sm};
+    background-color: ${theme.color.lightWhite};
   }
   * {
     outline: none;
