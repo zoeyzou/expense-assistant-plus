@@ -32,6 +32,7 @@ export const theme: Theme = {
   },
 
   color: {
+    white: '#FFFFFF',
     lightWhite: '#FFEEE4',
     darkOrange: '#CE6D39',
     orange: '#F17F42',
