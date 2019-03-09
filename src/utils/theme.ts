@@ -1,11 +1,18 @@
 export type Theme = {
   font: Font;
+  fontSize: FontSize;
   color: Color;
 };
 
 type Font = {
   title: string;
   body: string;
+};
+
+type FontSize = {
+  sm: string;
+  md: string;
+  lg: string;
 };
 
 type Color = {
@@ -17,6 +24,13 @@ export const theme: Theme = {
     title: "'Roboto Slab', serif",
     body: "'Montserrat', sans-serif",
   },
+
+  fontSize: {
+    sm: '14px',
+    md: '18px',
+    lg: '24px',
+  },
+
   color: {
     lightWhite: '#FFEEE4',
     darkOrange: '#CE6D39',
