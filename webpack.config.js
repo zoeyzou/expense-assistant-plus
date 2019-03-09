@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = env => {
@@ -8,11 +9,14 @@ module.exports = env => {
     entry: './src/index.tsx',
     output: {
       filename: '[name].js',
-      path: __dirname + '/build',
+      path: path.resolve(__dirname, 'build'),
     },
 
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.json'],
+      alias: {
+        src: path.resolve(__dirname, 'src'),
+      },
     },
 
     module: {
