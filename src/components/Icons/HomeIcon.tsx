@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TiHomeOutline } from 'react-icons/ti';
 import { theme } from 'src/utils/theme';
 
-interface HomeIconProps {
+export interface HomeIconProps {
   className?: string;
   color?: string;
   size?: string;
