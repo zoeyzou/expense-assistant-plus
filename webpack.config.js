@@ -9,6 +9,7 @@ module.exports = env => {
     entry: './src/index.tsx',
     output: {
       filename: '[name].js',
+      publicPath: '/',
       path: path.resolve(__dirname, 'build'),
     },
 
@@ -43,6 +44,7 @@ module.exports = env => {
 
     devServer: {
       stats: 'errors-only',
+      historyApiFallback: true,
       open: true,
       overlay: true,
     },
