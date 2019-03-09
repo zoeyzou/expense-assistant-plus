@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { HomeIconProps } from './HomeIcon';
 import { TiWeatherSunny } from 'react-icons/ti';
 import { theme } from 'src/utils/theme';
+import { IconProps } from 'src/models/icon-props';
 
-interface SunIconProps extends HomeIconProps {}
-
-const SunIcon: React.FunctionComponent<SunIconProps> = ({
+const SunIcon: React.FunctionComponent<IconProps> = ({
   className,
   color,
   size,

@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { HomeIconProps } from './HomeIcon';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { theme } from 'src/utils/theme';
+import { IconProps } from 'src/models/icon-props';
 
-interface AddIconProps extends HomeIconProps {}
-
-const AddIcon: React.FunctionComponent<AddIconProps> = ({
+const AddIcon: React.FunctionComponent<IconProps> = ({
   className,
   color,
   size,

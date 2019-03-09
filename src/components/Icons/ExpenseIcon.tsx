@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { HomeIconProps } from './HomeIcon';
 import { TiClipboard } from 'react-icons/ti';
 import { theme } from 'src/utils/theme';
+import { IconProps } from 'src/models/icon-props';
 
-interface ExpenseIconProps extends HomeIconProps {}
-
-const ExpenseIcon: React.FunctionComponent<ExpenseIconProps> = ({
+const ExpenseIcon: React.FunctionComponent<IconProps> = ({
   className,
   color,
   size,

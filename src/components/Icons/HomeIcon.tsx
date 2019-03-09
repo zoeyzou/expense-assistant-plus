@@ -1,15 +1,9 @@
 import * as React from 'react';
 import { TiHomeOutline } from 'react-icons/ti';
 import { theme } from 'src/utils/theme';
+import { IconProps } from 'src/models/icon-props';
 
-export interface HomeIconProps {
-  className?: string;
-  color?: string;
-  size?: string;
-  style?: React.CSSProperties;
-}
-
-const HomeIcon: React.FunctionComponent<HomeIconProps> = ({
+const HomeIcon: React.FunctionComponent<IconProps> = ({
   className,
   color,
   size,
