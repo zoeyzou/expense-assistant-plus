@@ -8,10 +8,6 @@ export const MenuWrapper = styled.div`
   padding: calc(30px + 2vh) 0 calc(10px + 2vh);
   background-color: ${({ theme }) => theme.color.darkOrange};
 
-  &:first-child {
-    margin-bottom: 20px;
-  }
-
   & > nav {
     flex: 1;
   }
