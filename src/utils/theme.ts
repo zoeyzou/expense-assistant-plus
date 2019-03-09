@@ -36,7 +36,7 @@ export const theme: Theme = {
     lightWhite: '#FFEEE4',
     darkOrange: '#CE6D39',
     orange: '#F17F42',
-    lightOrange: '#CE6D39',
+    lightOrange: '#E9A784',
     semiTransparent: 'rgba(255, 255, 255, 0.6)',
     black: '#222222',
   },
