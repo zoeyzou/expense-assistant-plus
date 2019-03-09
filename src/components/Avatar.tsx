@@ -56,6 +56,7 @@ const Avatar = styled(_Avatar)`
     font-size: ${({ width, theme }) =>
       (width && `calc(${theme.fontSize.sm} + ${width} / 10)`) ||
       theme.fontSize.md};
+    margin: calc(10px + 2vh) 0;
   }
 `;
 
