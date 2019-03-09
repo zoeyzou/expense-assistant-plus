@@ -16,6 +16,7 @@ module.exports = env => {
       extensions: ['.ts', '.tsx', '.js', '.json'],
       alias: {
         src: path.resolve(__dirname, 'src'),
+        public: path.resolve(__dirname, 'public'),
       },
     },
 
