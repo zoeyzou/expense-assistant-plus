@@ -1,10 +1,11 @@
 import * as React from 'react';
 import styled, { keyframes } from '../utils/styled-components';
+import { StyledComponentsProps } from 'src/models/styled-components-props';
 
-interface LoaderProps {
+type LoaderProps = StyledComponentsProps & {
   className?: string;
   loaderTheme?: 'dark' | 'light';
-}
+};
 
 const _Loader: React.FunctionComponent<LoaderProps> = (props: LoaderProps) => {
   return <div className={props.className} />;

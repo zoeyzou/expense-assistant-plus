@@ -4,7 +4,7 @@ import HomeIcon from './Icons/HomeIcon';
 import ExpenseIcon from './Icons/ExpenseIcon';
 import AddIcon from './Icons/AddIcon';
 
-interface NavigationsProps {}
+type NavigationsProps = {};
 
 const Navigations: React.FunctionComponent<NavigationsProps> = props => {
   return (

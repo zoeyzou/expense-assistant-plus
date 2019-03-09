@@ -1,17 +1,13 @@
 import * as React from 'react';
 import avatar from 'public/avatar.png';
 import styled from 'src/utils/styled-components';
+import { StyledComponentsProps } from 'src/models/styled-components-props';
 
-interface AvatarProps {
+type AvatarProps = StyledComponentsProps & {
   className?: string;
   avatarUrl?: string;
   name?: string;
-
-  width?: string;
-  height?: string;
-  padding?: string;
-  margin?: string;
-}
+};
 
 const _Avatar: React.FunctionComponent<AvatarProps> = ({
   className,

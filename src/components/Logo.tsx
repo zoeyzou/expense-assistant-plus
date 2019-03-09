@@ -1,16 +1,12 @@
 import * as React from 'react';
 import styled from 'src/utils/styled-components';
+import { StyledComponentsProps } from 'src/models/styled-components-props';
 
-interface LogoProps {
+type LogoProps = StyledComponentsProps & {
   className?: string;
   logoImg?: React.ReactNode;
   name: string;
-
-  width?: string;
-  height?: string;
-  padding?: string;
-  margin?: string;
-}
+};
 
 const _Logo: React.FunctionComponent<LogoProps> = ({
   className,

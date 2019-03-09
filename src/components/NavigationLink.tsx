@@ -1,21 +1,15 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'src/utils/styled-components';
-import { HomeIconProps } from 'src/components/Icons/HomeIcon';
-import { theme } from 'src/utils/theme';
+import { StyledComponentsProps } from 'src/models/styled-components-props';
 
-interface NavLinkProps {
+type NavLinkProps = StyledComponentsProps & {
   className?: string;
   exact?: boolean;
   toPath: string;
   icon?: (className: string) => React.ReactNode;
   title: string;
-
-  width?: string;
-  height?: string;
-  padding?: string;
-  margin?: string;
-}
+};
 
 const _NavLink: React.FunctionComponent<NavLinkProps> = ({
   className,

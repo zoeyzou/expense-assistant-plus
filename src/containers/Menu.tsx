@@ -4,9 +4,9 @@ import Navigations from 'src/components/Navigations';
 import Logo from 'src/components/Logo';
 import { MenuWrapper } from 'src/components/MenuWrapper';
 
-interface MenuProps {
+type MenuProps = {
   className?: string;
-}
+};
 
 const Menu: React.FunctionComponent<MenuProps> = ({ className }) => {
   return (
