@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HomeIconProps } from './HomeIcon';
-import { FiPlusCircle } from 'react-icons/fi';
+import { IoIosAddCircleOutline } from 'react-icons/io';
 import { theme } from 'src/utils/theme';
 
 interface AddIconProps extends HomeIconProps {}
@@ -12,7 +12,7 @@ const AddIcon: React.FunctionComponent<AddIconProps> = ({
   style,
 }) => {
   return (
-    <FiPlusCircle
+    <IoIosAddCircleOutline
       className={className}
       color={color}
       size={size}
