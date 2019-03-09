@@ -4,7 +4,6 @@ export type Theme = {
 };
 
 type Font = {
-  logo: string;
   title: string;
   body: string;
 };
@@ -15,11 +14,14 @@ type Color = {
 
 export const theme: Theme = {
   font: {
-    logo: '',
-    title: "",
-    body: "",
+    title: "'Roboto Slab', serif",
+    body: "'Montserrat', sans-serif",
   },
   color: {
-
+    lightWhite: '#FFEEE4',
+    darkOrange: '#CE6D39',
+    orange: '#F17F42',
+    lightOrange: '#CE6D39',
+    semiTransparent: 'rgba(255, 255, 255, 0.6)',
   },
 };
