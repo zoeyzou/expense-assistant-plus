@@ -45,6 +45,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "react-icons": "^3.5.0",
     "styled-components": "^4.1.3"
   }
 }
