@@ -3,9 +3,9 @@ import { HomeIconProps } from './HomeIcon';
 import { TiWeatherSunny } from 'react-icons/ti';
 import { theme } from 'src/utils/theme';
 
-interface AddIconProps extends HomeIconProps {}
+interface SunIconProps extends HomeIconProps {}
 
-const AddIcon: React.FunctionComponent<AddIconProps> = ({
+const SunIcon: React.FunctionComponent<SunIconProps> = ({
   className,
   color,
   size,
@@ -21,9 +21,9 @@ const AddIcon: React.FunctionComponent<AddIconProps> = ({
   );
 };
 
-AddIcon.defaultProps = {
+SunIcon.defaultProps = {
   color: theme.color.black,
   size: theme.fontSize.lg,
 };
 
-export default AddIcon;
+export default SunIcon;
