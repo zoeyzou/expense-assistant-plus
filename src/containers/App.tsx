@@ -1,15 +1,29 @@
 import * as React from 'react';
 import { GlobalStyle } from 'src/utils/global-styles';
-import Avatar from 'src/components/Avatar';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Menu from './Menu';
+import Loader from 'src/components/Loader';
+import AppWrapper from 'src/components/AppWrapper';
 
-export interface AppProps {}
+const Home = React.lazy(() => import('./Home'));
+
+export type AppProps = {};
 
 export default class App extends React.Component<AppProps, any> {
   public render() {
     return (
       <>
         <GlobalStyle />
-        <Avatar name='william' />
+        <React.Suspense fallback={<Loader />}>
+          <Router>
+            <AppWrapper>
+              <Menu />
+              <Switch>
+                <Route exact path='/' render={() => <Home />} />
+              </Switch>
+            </AppWrapper>
+          </Router>
+        </React.Suspense>
       </>
     );
   }
