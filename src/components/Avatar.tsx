@@ -2,24 +2,29 @@ import * as React from 'react';
 import avatar from 'public/avatar.png';
 import styled from 'src/utils/styled-components';
 import { StyledComponentsProps } from 'src/models/styled-components-props';
+import Loader from './Loader';
 
 type AvatarProps = StyledComponentsProps & {
   className?: string;
   avatarUrl?: string;
   name?: string;
+  isLoading?: boolean;
 };
 
 const _Avatar: React.FunctionComponent<AvatarProps> = ({
   className,
   avatarUrl,
   name,
+  isLoading,
 }) => {
   return (
     <div className={className}>
       <div className='imgWrapper'>
         <img src={avatarUrl ? avatarUrl : avatar} alt='avatar' />
       </div>
-      {name && <p className='description'>Hi, {name}!</p>}
+      <div className='description'>
+        {isLoading ? <Loader /> : name && `Hi, ${name}!`}
+      </div>
     </div>
   );
 };
