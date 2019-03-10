@@ -14,7 +14,13 @@ export default class App extends React.Component<AppProps, any> {
     return (
       <>
         <GlobalStyle />
-        <React.Suspense fallback={<Loader />}>
+        <React.Suspense
+          fallback={
+            <AppWrapper>
+              <Loader />
+            </AppWrapper>
+          }
+        >
           <Router>
             <AppWrapper>
               <Menu />
