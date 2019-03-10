@@ -1,4 +1,10 @@
-import { UserState, UserActionType, SET_USER } from './types';
+import {
+  UserState,
+  UserActionType,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
+} from './types';
 
 const initialState: UserState = {
   user: { name: '' },
@@ -9,10 +15,20 @@ export const userReducer = (
   action: UserActionType
 ): UserState => {
   switch (action.type) {
-    case SET_USER:
+    case GET_USER_REQUEST:
       return {
         ...state,
-        ...{ user: action.user },
+        ...{ loadingState: 'pending' },
+      };
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        ...{ loadingState: 'success', user: action.payload.user },
+      };
+    case GET_USER_FAILURE:
+      return {
+        ...state,
+        ...{ loadingState: 'failure', error: action.payload.error },
       };
     default:
       return state;

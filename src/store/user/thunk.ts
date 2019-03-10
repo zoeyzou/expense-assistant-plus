@@ -1,20 +1,22 @@
 import { Dispatch } from 'redux';
 import { loadUser } from '../../utils/api';
-import { Loading_Start, ApiActionType, Loading_Success } from '../api/types';
-import { UserActionType, SET_USER } from './types';
+import { UserActionType, GET_USER_REQUEST, GET_USER_SUCCESS } from './types';
 
 export const getUserThunk = () => async (
-  dispatch: Dispatch<ApiActionType | UserActionType>
+  dispatch: Dispatch<UserActionType>
 ) => {
   dispatch({
-    type: Loading_Start,
+    type: GET_USER_REQUEST,
+    payload: {
+      loadingState: 'pending',
+    },
   });
   const user = await loadUser();
   dispatch({
-    type: Loading_Success,
-  });
-  dispatch({
-    type: SET_USER,
-    user: user,
+    type: GET_USER_SUCCESS,
+    payload: {
+      loadingState: 'success',
+      user: user,
+    },
   });
 };
