@@ -6,12 +6,15 @@ module.exports = env => {
 
   return {
     mode: isProduction ? 'production' : 'development',
-    entry: ["@babel/polyfill", './src/index.tsx'],
+    entry: ['@babel/polyfill', './src/index.tsx'],
     output: {
-      filename: '[name].js',
+      chunkFilename: '[name].[chunkhash:4].js',
+      filename: '[name].[chunkhash:4].js',
       publicPath: '/',
       path: path.resolve(__dirname, 'build'),
     },
+
+    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
 
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.json'],
