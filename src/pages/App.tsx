@@ -3,7 +3,7 @@ import { GlobalStyle } from 'src/utils/global-styles';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './Menu';
 import Loader from 'src/components/Loader';
-import AppWrapper from 'src/components/AppWrapper';
+import Flex from 'src/components/Flex';
 
 const Home = React.lazy(() => import('./Home'));
 
@@ -16,18 +16,18 @@ export default class App extends React.Component<AppProps, any> {
         <GlobalStyle />
         <React.Suspense
           fallback={
-            <AppWrapper>
+            <Flex>
               <Loader />
-            </AppWrapper>
+            </Flex>
           }
         >
           <Router>
-            <AppWrapper>
+            <Flex>
               <Menu />
               <Switch>
                 <Route exact path='/' render={() => <Home />} />
               </Switch>
-            </AppWrapper>
+            </Flex>
           </Router>
         </React.Suspense>
       </>
