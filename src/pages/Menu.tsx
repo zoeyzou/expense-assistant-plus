@@ -1,17 +1,13 @@
 import * as React from 'react';
-import Avatar from 'src/components/Avatar';
 import Navigations from 'src/components/Navigations';
 import Logo from 'src/components/Logo';
 import { MenuWrapper } from 'src/components/MenuWrapper';
+import AvatarContainer from 'src/containers/AvatarContainer';
 
-type MenuProps = {
-  className?: string;
-};
-
-const Menu: React.FunctionComponent<MenuProps> = ({ className }) => {
+const Menu: React.FunctionComponent<{}> = () => {
   return (
-    <MenuWrapper className={className}>
-      <Avatar name='william' />
+    <MenuWrapper>
+      <AvatarContainer />
       <Navigations />
       <Logo name='Expense Assistant 2.0' />
     </MenuWrapper>
