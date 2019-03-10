@@ -6,7 +6,7 @@ module.exports = env => {
 
   return {
     mode: isProduction ? 'production' : 'development',
-    entry: './src/index.tsx',
+    entry: ["@babel/polyfill", './src/index.tsx'],
     output: {
       filename: '[name].js',
       publicPath: '/',
