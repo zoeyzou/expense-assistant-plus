@@ -1,13 +1,19 @@
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { userReducer } from './user/reducers';
-import { apiReducer } from './api/reducers';
+import { expensesReducer } from './expenses/reducers';
 
 const rootReducer = combineReducers({
   userState: userReducer,
-  apiState: apiReducer,
+  expensesState: expensesReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-export default createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
+export default store;
