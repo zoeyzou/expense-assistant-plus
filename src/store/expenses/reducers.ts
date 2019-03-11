@@ -17,7 +17,11 @@ export const expensesReducer = (
     case 'GET_EXPENSES_SUCCESS':
       return {
         ...state,
-        ...{ loadingState: 'success', expenses: action.payload.expenses },
+        ...{
+          loadingState: 'success',
+          expenses: action.payload.expenses,
+          sum: action.payload.sum,
+        },
       };
     case 'GET_EXPENSES_FAILURE':
       return {
