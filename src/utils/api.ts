@@ -1,4 +1,5 @@
 import { User } from '../models/user';
+import { Request } from './axios-request';
 
 async function delay(timeout: number) {
   return new Promise(resolve => {
@@ -11,4 +12,16 @@ export async function loadUser(): Promise<User> {
   // fake a user
   const user: User = { name: 'william' };
   return user;
+}
+
+export async function loadExpenses(
+  pageLimit: number = 10,
+  offset: number = 0
+): Promise<any> {
+  const path = `/expenses?limit=${pageLimit}&offset=${offset}`;
+
+  return await Request({
+    method: 'get',
+    url: path,
+  });
 }
