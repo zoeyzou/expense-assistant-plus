@@ -6,6 +6,7 @@ import {
   GET_EXPENSES_FAILURE,
 } from './types';
 import { loadExpenses } from 'src/utils/api';
+import { ExpenseList } from 'src/models/expense';
 
 export const getExpensesThunk = (pageLimit?: number, offset?: number) => (
   dispatch: Dispatch<ExpensesActionType>
@@ -17,13 +18,13 @@ export const getExpensesThunk = (pageLimit?: number, offset?: number) => (
     },
   });
   loadExpenses(pageLimit, offset)
-    .then((expenses: any) => {
+    .then((expenses: ExpenseList) => {
       console.log(expenses);
       dispatch({
         type: GET_EXPENSES_SUCCESS,
         payload: {
           loadingState: 'success',
-          expenses: expenses,
+          expenses: expenses.expenses,
           sum: expenses.total,
         },
       });
