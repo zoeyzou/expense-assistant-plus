@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = env => {
   const isProduction = env === 'production';
@@ -29,6 +30,13 @@ module.exports = env => {
         {
           test: /\.tsx?$/,
           use: ['babel-loader'],
+        },
+        {
+          test: /\.css$/,
+          use: [
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+            'css-loader',
+          ],
         },
         {
           test: /\.(png|jpg|gif)$/,
@@ -61,6 +69,10 @@ module.exports = env => {
     plugins: [
       new HtmlWebpackPlugin({
         template: 'public/index.html',
+      }),
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
       }),
     ],
   };
