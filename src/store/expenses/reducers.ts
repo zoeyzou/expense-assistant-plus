@@ -19,7 +19,7 @@ export const expensesReducer = (
         ...state,
         ...{
           loadingState: 'success',
-          expenses: action.payload.expenses,
+          expenses: [...action.payload.expenses],
           sum: action.payload.sum,
         },
       };
