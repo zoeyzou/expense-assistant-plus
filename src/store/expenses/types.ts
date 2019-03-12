@@ -5,8 +5,6 @@ export type ExpensesState = {
   error?: string;
   expenses: any[];
   sum?: number;
-  pageLimit?: number;
-  page?: number;
 };
 
 export const GET_EXPENSES_REQUEST = 'GET_EXPENSES_REQUEST';
