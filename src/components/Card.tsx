@@ -14,6 +14,9 @@ const Card = styled.div<StyledComponentsProps>`
   border-image: url(http://tobias-reinhardt.de/img/frame.png) 11 stretch;
   border-style: solid;
 
+  max-width: 90vh;
+  overflow-y: auto;
+
   font-family: ${({ theme }) => theme.font.body};
   font-size: ${({ theme }) => theme.fontSize.lg};
 `;
