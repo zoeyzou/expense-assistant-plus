@@ -19,7 +19,7 @@ const WelcomeTextContainer: React.FunctionComponent<
   WelcomeTextContainerProps
 > = ({ sum, loadingState, getExpenses }) => {
   React.useEffect(() => {
-    getExpenses();
+    getExpenses(10, 0); // this page only cares about sum so any arguments are fine
   }, []);
   return (
     <Flex flexFlow='column'>
@@ -56,8 +56,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  getExpenses: () => {
-    dispatch(getExpensesThunk());
+  getExpenses: (pageLimit: number, offset: number) => {
+    dispatch(getExpensesThunk(pageLimit, offset));
   },
 });
 
