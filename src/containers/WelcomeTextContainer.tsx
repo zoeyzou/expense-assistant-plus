@@ -29,17 +29,17 @@ const WelcomeTextContainer: React.FunctionComponent<
         <ErrorIndicator />
       ) : loadingState === 'success' ? (
         <>
-          <Text fontStyle='italic' padding='10px'>
+          <Text fontStyle='italic' padding='10px' textAlign='center'>
             Good day! Did you sleep well?
           </Text>
-          <Text fontStyle='italic' padding='10px'>
+          <Text fontStyle='italic' padding='10px' textAlign='center'>
             We have{' '}
             <Text display='inline' fontWeight='bold'>
               {sum}
             </Text>{' '}
             expenses to work with today. Take your time!
           </Text>
-          <Text fontStyle='italic' padding='10px'>
+          <Text fontStyle='italic' padding='10px' textAlign='center'>
             when you are ready, go to 'all expenses' and let's rock!
           </Text>
         </>
