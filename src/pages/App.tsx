@@ -2,6 +2,7 @@ import * as React from 'react';
 import { GlobalStyle } from 'src/utils/global-styles';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './Menu';
+import Expenses from './Expenses';
 import Loader from 'src/components/Loader';
 import Flex from 'src/components/Flex';
 
@@ -26,6 +27,8 @@ export default class App extends React.Component<AppProps, any> {
               <Menu />
               <Switch>
                 <Route exact path='/' render={() => <Home />} />
+                <Route exact path='/expenses' render={() => <Expenses />} />
+                <Route exact path='/expenses/add' render={() => <Home />} />
               </Switch>
             </Flex>
           </Router>
