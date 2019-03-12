@@ -8,7 +8,7 @@ import {
 import { loadExpenses } from 'src/utils/api';
 import { ExpenseList } from 'src/models/expense';
 
-export const getExpensesThunk = (pageLimit?: number, offset?: number) => (
+export const getExpensesThunk = (pageLimit: number, offset: number) => (
   dispatch: Dispatch<ExpensesActionType>
 ) => {
   dispatch({

@@ -15,8 +15,8 @@ export async function loadUser(): Promise<User> {
 }
 
 export async function loadExpenses(
-  pageLimit: number = 10,
-  offset: number = 0
+  pageLimit: number,
+  offset: number
 ): Promise<any> {
   const path = `/expenses?limit=${pageLimit}&offset=${offset}`;
 
