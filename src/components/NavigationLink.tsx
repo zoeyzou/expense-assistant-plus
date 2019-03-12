@@ -54,7 +54,7 @@ const NavigationLink = styled(_NavLink).attrs({
   &:hover {
     transition: all 0.3s ease-out;
     background: ${({ theme }) => theme.color.lightOrange};
-    color: ${({ theme }) => theme.color.orange};
+    color: ${({ theme }) => theme.color.darkOrange};
 
     .icon {
       fill: ${({ theme }) => theme.color.orange};
