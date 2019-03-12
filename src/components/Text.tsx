@@ -6,6 +6,7 @@ type TextProps = {
   fontFamily?: string;
   fontWeight?: string;
   fontStyle?: string;
+  textAlign?: string;
   display?: string;
 };
 
@@ -15,6 +16,7 @@ const Text = styled.div<StyledComponentsProps & TextProps>`
   font-family: ${({ fontFamily, theme }) => fontFamily || theme.font.body};
   font-weight: ${({ fontWeight }) => fontWeight || 'inherit'};
   font-style: ${({ fontStyle }) => fontStyle || 'inherit'};
+  text-align: ${({ textAlign }) => textAlign || 'inherit'};
 
   width: ${({ width }) => width};
   height: ${({ height }) => height};
