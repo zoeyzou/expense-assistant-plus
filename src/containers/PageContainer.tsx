@@ -1,16 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { User } from 'src/models/user';
-import { LoadingState } from 'src/models/loading-state';
 import { AppState } from 'src/store';
-import { getUserThunk } from 'src/store/user/thunk';
-import Avatar from 'src/components/Avatar';
 import Flex from 'src/components/Flex';
 import Text from 'src/components/Text';
-import { getTotalPages } from 'src/store/page-info/selectors';
 import { theme } from 'src/utils/theme';
-import Loader from 'src/components/Loader';
 
 type PageContainerProps = {
   currentPage: number;
