@@ -50,12 +50,12 @@ export async function saveComment(id: string, comment: string) {
   });
 }
 
-export async function saveReceipts(id: string, file?: any) {
+export async function saveReceipt(id: string, file?: any) {
   if (!file) {
     throw new Error("There's no comment");
   }
 
-  const path = `expenses/${id}`;
+  const path = `expenses/${id}/receipts`;
 
   const data = new FormData();
   data.append('file', file, file.name);
@@ -63,6 +63,6 @@ export async function saveReceipts(id: string, file?: any) {
   return await Request({
     method: 'post',
     url: path,
-    data: data,
+    data: { files: data },
   });
 }
