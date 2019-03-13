@@ -18,7 +18,7 @@ const _Title: React.FunctionComponent<TitleProps> = props => {
         fontFamily={theme.font.title}
         fontWeight='bold'
       >
-        ALL EXPENSES
+        {props.children}
       </Text>
     </Flex>
   );
