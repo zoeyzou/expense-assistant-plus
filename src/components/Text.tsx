@@ -8,6 +8,8 @@ type TextProps = {
   fontStyle?: string;
   textAlign?: string;
   display?: string;
+  color?: string;
+  backgroundColor?: string;
 };
 
 const Text = styled.div<StyledComponentsProps & TextProps>`
@@ -17,6 +19,8 @@ const Text = styled.div<StyledComponentsProps & TextProps>`
   font-weight: ${({ fontWeight }) => fontWeight || 'inherit'};
   font-style: ${({ fontStyle }) => fontStyle || 'inherit'};
   text-align: ${({ textAlign }) => textAlign || 'inherit'};
+  color: ${({ color, theme }) => color || theme.color.black};
+  background-color: ${({ backgroundColor }) => backgroundColor};
 
   width: ${({ width }) => width};
   height: ${({ height }) => height};
