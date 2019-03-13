@@ -34,3 +34,35 @@ export async function loadExpenseById(id: string) {
     url: path,
   });
 }
+
+export async function saveComment(id: string, comment: string) {
+  if (!comment) {
+    throw new Error("There's no comment");
+  }
+
+  const path = `expenses/${id}`;
+  const data = { comment: comment };
+
+  return await Request({
+    method: 'post',
+    url: path,
+    data: data,
+  });
+}
+
+export async function saveReceipts(id: string, file?: any) {
+  if (!file) {
+    throw new Error("There's no comment");
+  }
+
+  const path = `expenses/${id}`;
+
+  const data = new FormData();
+  data.append('file', file, file.name);
+
+  return await Request({
+    method: 'post',
+    url: path,
+    data: data,
+  });
+}
