@@ -1,9 +1,10 @@
 import { LoadingState } from '../../models/loading-state';
+import { Expense } from 'src/models/expense';
 
 export type ExpensesState = {
   loadingState?: LoadingState;
   error?: string;
-  expenses: any[];
+  expenses: Expense[];
   sum?: number;
 };
 
@@ -22,7 +23,7 @@ type GetExpensesSuccessAction = {
   type: typeof GET_EXPENSES_SUCCESS;
   payload: {
     loadingState: LoadingState;
-    expenses: any;
+    expenses: Expense[];
     sum: number;
   };
 };
