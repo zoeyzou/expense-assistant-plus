@@ -2,11 +2,12 @@ import * as React from 'react';
 import { GlobalStyle } from 'src/utils/global-styles';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './Menu';
-import Expenses from './Expenses';
 import Loader from 'src/components/Loader';
 import Flex from 'src/components/Flex';
 
 const Home = React.lazy(() => import('./Home'));
+const Expenses = React.lazy(() => import('./Expenses'));
+const Expense = React.lazy(() => import('./Expense'));
 
 export type AppProps = {};
 
@@ -29,6 +30,11 @@ export default class App extends React.Component<AppProps, any> {
                 <Route exact path='/' render={() => <Home />} />
                 <Route exact path='/expenses' render={() => <Expenses />} />
                 <Route exact path='/expenses/add' render={() => <Home />} />
+                <Route
+                  exact
+                  path='/expenses/:id'
+                  render={(...props: any) => <Expense {...props} />}
+                />
               </Switch>
             </Flex>
           </Router>
