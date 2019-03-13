@@ -1,0 +1,78 @@
+import { Dispatch } from 'redux';
+import {
+  ExpenseActionType,
+  GET_EXPENSE_REQUEST,
+  GET_EXPENSE_SUCCESS,
+  GET_EXPENSE_FAILURE,
+  SAVE_EXPENSE_REQUEST,
+  SAVE_EXPENSE_SUCCESS,
+  SAVE_EXPENSE_FAILURE,
+} from './types';
+import { loadExpenseById, saveComment } from 'src/utils/api';
+import { Expense } from 'src/models/expense';
+
+export const getExpenseThunk = (id: string) => (
+  dispatch: Dispatch<ExpenseActionType>
+) => {
+  dispatch({
+    type: GET_EXPENSE_REQUEST,
+    payload: {
+      loadingState: 'pending',
+    },
+  });
+
+  loadExpenseById(id)
+    .then((expense: Expense) => {
+      console.log(expense);
+      dispatch({
+        type: GET_EXPENSE_SUCCESS,
+        payload: {
+          loadingState: 'success',
+          expense: expense,
+        },
+      });
+    })
+    .catch((err: any) => {
+      console.log(err);
+      dispatch({
+        type: GET_EXPENSE_FAILURE,
+        payload: {
+          loadingState: 'failure',
+          error: err,
+        },
+      });
+    });
+};
+
+export const saveCommentThunk = (id: string, comment: string) => (
+  dispatch: Dispatch<ExpenseActionType>
+) => {
+  dispatch({
+    type: SAVE_EXPENSE_REQUEST,
+    payload: {
+      loadingState: 'pending',
+    },
+  });
+
+  saveComment(id, comment)
+    .then((expense: Expense) => {
+      console.log(expense);
+      dispatch({
+        type: SAVE_EXPENSE_SUCCESS,
+        payload: {
+          loadingState: 'success',
+          expense: expense,
+        },
+      });
+    })
+    .catch((err: any) => {
+      console.log(err);
+      dispatch({
+        type: SAVE_EXPENSE_FAILURE,
+        payload: {
+          loadingState: 'failure',
+          error: err,
+        },
+      });
+    });
+};
