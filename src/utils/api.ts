@@ -25,3 +25,12 @@ export async function loadExpenses(
     url: path,
   });
 }
+
+export async function loadExpenseById(id: string) {
+  const path = `expenses/${id}`;
+
+  return await Request({
+    method: 'get',
+    url: path,
+  });
+}
