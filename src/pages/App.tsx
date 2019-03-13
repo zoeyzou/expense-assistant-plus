@@ -33,7 +33,7 @@ export default class App extends React.Component<AppProps, any> {
                 <Route
                   exact
                   path='/expenses/:id'
-                  render={(...props: any) => <Expense {...props} />}
+                  render={(props: any) => <Expense {...props} />}
                 />
               </Switch>
             </Flex>
