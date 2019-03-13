@@ -161,9 +161,9 @@ const _TableContainer: React.FunctionComponent<TableContainerProps> = ({
       filterable
       columns={columns}
       pageSize={pageSize}
-      page={page - 1}
+      // page={page - 1}
       // a hack to fix react table page issue
-      pages={totalPages}
+      // pages={totalPages}
       showPageJump={false}
       PreviousComponent={() => (
         <Button label='Previous' onClick={setPreviousPage} />
