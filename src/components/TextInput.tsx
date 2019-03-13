@@ -41,7 +41,7 @@ const TextInput = styled(_TextInput)`
   margin: ${({ margin }) => margin};
 
   input {
-    font-size: ${({ theme }) => theme.font.sm};
+    font-size: ${({ theme }) => theme.fontSize.sm};
     padding: 5px 10px;
     width: ${({ width }) => width || '200px'};
     height: ${({ height }) => height || '20px'};
