@@ -3,7 +3,7 @@ import { theme } from 'src/utils/theme';
 import { IconProps } from 'src/models/icon-props';
 import { FiEye } from 'react-icons/fi';
 
-const HomeIcon: React.FunctionComponent<IconProps> = ({
+const ViewIcon: React.FunctionComponent<IconProps> = ({
   className,
   color,
   size,
@@ -14,9 +14,9 @@ const HomeIcon: React.FunctionComponent<IconProps> = ({
   );
 };
 
-HomeIcon.defaultProps = {
+ViewIcon.defaultProps = {
   color: theme.color.black,
   size: theme.fontSize.lg,
 };
 
-export default HomeIcon;
+export default ViewIcon;
