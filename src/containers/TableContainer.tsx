@@ -47,9 +47,7 @@ const _TableContainer: React.FunctionComponent<TableContainerProps> = ({
   history,
 }) => {
   React.useEffect(() => {
-    if (pageSize && page) {
-      getExpenses(pageSize, pageSize * (page - 1));
-    }
+    getExpenses(pageSize, page);
   }, [pageSize, page]);
 
   const filterName = (filter: Filter, row: any) => {
@@ -246,8 +244,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  getExpenses: (pageLimit: number, offset: number) => {
-    dispatch(getExpensesThunk(pageLimit, offset));
+  getExpenses: (pageLimit: number, page: number) => {
+    dispatch(getExpensesThunk(pageLimit, page));
   },
   setPage: (page: number) =>
     dispatch({

@@ -8,7 +8,7 @@ import {
 import { loadExpenses } from 'src/utils/api';
 import { ExpenseList } from 'src/models/expense';
 
-export const getExpensesThunk = (pageLimit: number, offset: number) => (
+export const getExpensesThunk = (pageLimit: number, page: number) => (
   dispatch: Dispatch<ExpensesActionType>
 ) => {
   dispatch({
@@ -17,6 +17,9 @@ export const getExpensesThunk = (pageLimit: number, offset: number) => (
       loadingState: 'pending',
     },
   });
+
+  const offset = pageLimit * (page - 1);
+
   loadExpenses(pageLimit, offset)
     .then((expenses: ExpenseList) => {
       console.log(expenses);
