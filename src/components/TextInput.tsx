@@ -7,6 +7,7 @@ type TextInputProps = StyledComponentsProps & {
   label?: string;
   labelFor?: string;
   defaultValue?: string;
+  placeholder?: string;
   onChange: (value: string) => void;
 };
 
@@ -15,6 +16,7 @@ const _TextInput: React.FunctionComponent<TextInputProps> = ({
   label,
   labelFor,
   defaultValue,
+  placeholder,
   onChange,
 }) => {
   return (
@@ -24,6 +26,7 @@ const _TextInput: React.FunctionComponent<TextInputProps> = ({
         name={labelFor}
         type='text'
         value={defaultValue}
+        placeholder={placeholder}
         onChange={e => onChange(e.target.value)}
       />
     </label>
