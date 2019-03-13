@@ -8,7 +8,7 @@ import {
   SAVE_EXPENSE_SUCCESS,
   SAVE_EXPENSE_FAILURE,
 } from './types';
-import { loadExpenseById, saveComment } from 'src/utils/api';
+import { loadExpenseById, saveComment, saveReceipt } from 'src/utils/api';
 import { Expense } from 'src/models/expense';
 
 export const getExpenseThunk = (id: string) => (
@@ -55,6 +55,39 @@ export const saveCommentThunk = (id: string, comment: string) => (
   });
 
   saveComment(id, comment)
+    .then((expense: Expense) => {
+      console.log(expense);
+      dispatch({
+        type: SAVE_EXPENSE_SUCCESS,
+        payload: {
+          loadingState: 'success',
+          expense: expense,
+        },
+      });
+    })
+    .catch((err: any) => {
+      console.log(err);
+      dispatch({
+        type: SAVE_EXPENSE_FAILURE,
+        payload: {
+          loadingState: 'failure',
+          error: err,
+        },
+      });
+    });
+};
+
+export const saveFileThunk = (id: string, file: any) => (
+  dispatch: Dispatch<ExpenseActionType>
+) => {
+  dispatch({
+    type: SAVE_EXPENSE_REQUEST,
+    payload: {
+      loadingState: 'pending',
+    },
+  });
+
+  saveReceipt(id, file)
     .then((expense: Expense) => {
       console.log(expense);
       dispatch({
