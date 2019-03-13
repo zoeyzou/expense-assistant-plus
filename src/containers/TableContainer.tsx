@@ -2,13 +2,11 @@ import * as React from 'react';
 import ReactTable, { Filter, RowInfo, Column } from 'react-table';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-
 import { AppState } from 'src/store';
 import { getExpensesThunk } from 'src/store/expenses/thunk';
 import { Expense } from 'src/models/expense';
 import 'react-table/react-table.css';
 import Flex from 'src/components/Flex';
-import Card from 'src/components/Card';
 import { getTotalPages } from 'src/store/page-info/selectors';
 import { LoadingState } from 'src/models/loading-state';
 import { SET_PAGE, SET_PAGE_LIMIT } from 'src/store/page-info/types';
@@ -16,9 +14,8 @@ import Button from 'src/components/Button';
 import TextInput from 'src/components/TextInput';
 import ViewIcon from 'src/components/Icons/ViewIcon';
 import { theme } from 'src/utils/theme';
-import { Redirect, withRouter, RouteComponentProps } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router';
 import styled from 'src/utils/styled-components';
-import * as H from 'history';
 
 type TableContainerProps = RouteComponentProps<any> & {
   className?: string;
