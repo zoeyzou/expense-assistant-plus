@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyledComponentsProps } from 'src/models/styled-components-props';
 import styled from 'src/utils/styled-components';
 import UploadIcon from './Icons/UploadIcon';
+import { theme } from 'src/utils/theme';
 
 type FileUploaderProps = StyledComponentsProps & {
   label?: string;
@@ -16,45 +17,54 @@ const _FileUploader: React.FunctionComponent<FileUploaderProps> = ({
   supportMultiple,
   onChange,
 }) => {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target);
+    event.currentTarget && onChange(event.currentTarget.files);
+  };
   return (
-    <label className={className} htmlFor='file'>
-      <UploadIcon /> <span>{label || 'Choose a file'}</span>
+    <>
       <input
+        className={className}
         type='file'
-        name='file'
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          onChange(event.currentTarget.files)
-        }
+        name='file-1'
+        id='file-1'
+        onClick={() => console.log('clicked')}
+        onChange={changeHandler}
         multiple={supportMultiple}
       />
-    </label>
+      <label htmlFor='file-1'>
+        <UploadIcon color={theme.color.orange} />{' '}
+        <span>{label || 'Choose a file'}</span>
+      </label>
+    </>
   );
 };
 
 const FileUploader = styled(_FileUploader)`
-  display: block;
-  font-weight: 700;
-  color: ${({ theme }) => theme.color.darkOrange};
-  border: 2px dashed ${({ theme }) => theme.color.darkOrange};
-  border-radius: 4px;
-  padding: 4px 8px;
-  transition: all 0.2s ease-in;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 
-  &:focus,
-  &:hover {
-    background-color: ${({ theme }) => theme.color.darkOrange};
-    color: ${({ theme }) => theme.color.lightWhite};
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
+  & + label {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: ${({ theme }) => theme.color.darkOrange};
+    border: 2px dashed ${({ theme }) => theme.color.darkOrange};
+    border-radius: 4px;
+    padding: 4px 8px;
+    transition: all 0.2s ease-in;
 
-  input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+    &:focus,
+    &:hover {
+      background-color: ${({ theme }) => theme.color.darkOrange};
+      color: ${({ theme }) => theme.color.lightWhite};
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
   }
 `;
 
