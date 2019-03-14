@@ -49,6 +49,11 @@ const FileUploader = styled(_FileUploader)`
   z-index: -1;
 
   & + label {
+    width: ${({ width }) => width};
+    height: ${({ height }) => height};
+    padding: ${({ padding }) => padding};
+    margin: ${({ margin }) => margin};
+
     display: flex;
     align-items: center;
     font-weight: 700;
