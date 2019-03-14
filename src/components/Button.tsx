@@ -45,7 +45,7 @@ const Button = styled(_Button)`
   padding: ${({ padding }) => padding};
   margin: ${({ margin }) => margin};
 
-  &.primary {
+  &.secondary {
     background: ${({ theme }) => theme.color.lightWhite};
     color: ${({ theme }) => theme.color.orange};
 
@@ -55,7 +55,7 @@ const Button = styled(_Button)`
     }
   }
 
-  &.secondary {
+  &.primary {
     background: ${({ theme }) => theme.color.orange};
 
     &:hover {
