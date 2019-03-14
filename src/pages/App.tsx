@@ -24,7 +24,7 @@ export default class App extends React.Component<AppProps, any> {
           }
         >
           <Router>
-            <Flex>
+            <Flex height='100%'>
               <Menu />
               <Switch>
                 <Route exact path='/' render={() => <Home />} />
