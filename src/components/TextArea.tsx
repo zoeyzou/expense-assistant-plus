@@ -3,6 +3,7 @@ import { StyledComponentsProps } from 'src/models/styled-components-props';
 import styled from 'src/utils/styled-components';
 
 type TextAreaProps = StyledComponentsProps & {
+  className?: string;
   maxWidth?: string;
   maxHeight?: string;
   placeholder?: string;
@@ -11,12 +12,14 @@ type TextAreaProps = StyledComponentsProps & {
 };
 
 const _TextArea: React.FunctionComponent<TextAreaProps> = ({
+  className,
   placeholder,
   value,
   onChange,
 }) => {
   return (
     <textarea
+      className={className}
       placeholder={placeholder || 'Leave a comment for this expense'}
       value={value}
       onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
