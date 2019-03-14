@@ -52,17 +52,17 @@ export async function saveComment(id: string, comment: string) {
 
 export async function saveReceipt(id: string, file?: any) {
   if (!file) {
-    throw new Error("There's no comment");
+    throw new Error("There's no file");
   }
 
   const path = `expenses/${id}/receipts`;
 
   const data = new FormData();
-  data.append('file', file, file.name);
+  data.append('receipt', file, file.name);
 
   return await Request({
     method: 'post',
     url: path,
-    data: { files: data },
+    data: data,
   });
 }

@@ -21,7 +21,10 @@ import { LoadingState } from 'src/models/loading-state';
 import Loader from 'src/components/Loader';
 import Text from 'src/components/Text';
 import Button from 'src/components/Button';
-import { saveReceipt } from 'src/utils/api';
+import FileUploader from 'src/components/FileUploader';
+import TextArea from 'src/components/TextArea';
+import { theme } from 'src/utils/theme';
+import TableWrapper from 'src/components/TableWrapper';
 
 type ExpenseProps = RouteComponentProps & {
   expense?: Expense;
@@ -30,6 +33,7 @@ type ExpenseProps = RouteComponentProps & {
   getExpense: (id: string) => void;
   saveComment: (id: string, comment: string) => void;
   saveReceipt: (id: string, file: any) => void;
+  history?: History;
 };
 
 const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
@@ -39,6 +43,8 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
   loadingState,
   getExpense,
   saveComment,
+  saveReceipt,
+  history,
 }) => {
   const id: string = match && match.params && match.params.id;
 
@@ -48,49 +54,132 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
     getExpense(id);
   }, []);
 
-  const [text, changeText] = React.useState((expense && expense.comment) || '');
+  const [text, changeText] = React.useState<string>('');
 
-  const [file, changeFile] = React.useState('');
+  const [files, changeFiles] = React.useState<FileList | null>(null);
 
   const saveHandler = () => {
-    console.log(file);
     saveComment(id, text);
-    saveReceipt(id, file);
+    saveReceipt(id, files && files[0]);
+  };
+
+  const backHandler = () => {
+    history.push(`/expenses`);
   };
 
   return (
-    <Flex padding='calc(20px + 3vh) calc(20px + 5vw)'>
-      <Flex style={{ backgroundColor: 'rgba(255, 255, 255, 0.6)' }}>
+    <Flex padding='calc(20px + 3vh) calc(20px + 5vw)' height='100%'>
+      <Flex
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0.6)' }}
+        height='100%'
+      >
         <Flex flexFlow='column' padding='2% 10%'>
           <Title>Expense Details</Title>
           {loadingState === 'pending' ? (
             <Loader />
           ) : (
-            <Flex justifyContent='space-around' height='auto'>
-              <Text>{expense && expense.date.slice(0, 10)}</Text>
-              <Text>
-                {expense && expense.user.first} {expense && expense.user.last}
-              </Text>
+            <Flex flexFlow='column'>
+              <Flex
+                justifyContent='space-between'
+                height='auto'
+                margin='5px auto'
+              >
+                <Text color={theme.color.orange} fontWeight='bolder'>
+                  {expense && expense.date.slice(0, 10)}
+                </Text>
+                <Text color={theme.color.orange} fontWeight='bolder'>
+                  {expense && expense.user.first} {expense && expense.user.last}
+                </Text>
+              </Flex>
+              <TableWrapper flexFlow='column'>
+                <>
+                  <Flex
+                    justifyContent='space-between'
+                    padding='12px 10px'
+                    height='60px'
+                  >
+                    <Text style={{ flexBasis: '50%' }}>
+                      Category: {(expense && expense.category) || 'N/A'}
+                    </Text>
+                    <Text style={{ flexBasis: '50%' }}>
+                      Email: {(expense && expense.user.email) || 'N/A'}
+                    </Text>
+                  </Flex>
+                  <Flex
+                    justifyContent='space-between'
+                    padding='12px 10px'
+                    height='60px'
+                  >
+                    <Text style={{ flexBasis: '50%' }}>
+                      Merchant: {(expense && expense.merchant) || 'N/A'}
+                    </Text>
+                    <Text style={{ flexBasis: '50%' }}>
+                      Amount:{' '}
+                      {`${expense && expense.amount.value}${expense &&
+                        expense.amount.currency}` || 'N/A'}
+                    </Text>
+                  </Flex>
+                  <Flex
+                    justifyContent='space-between'
+                    padding='12px 10px'
+                    height='60px'
+                  >
+                    <Flex
+                      justifyContent='flex-start'
+                      style={{ flexBasis: '50%' }}
+                    >
+                      <Text>Receipts: </Text>
+                      <FileUploader
+                        label={files !== null ? files[0].name : 'Choose a file'}
+                        onChange={changeFiles}
+                        margin='0 10px'
+                      />
+                    </Flex>
+                    <Flex
+                      justifyContent='flex-start'
+                      style={{ flexBasis: '50%' }}
+                    >
+                      <Text fontSize={theme.fontSize.sm}>
+                        {expense &&
+                          expense.receipts.length > 0 &&
+                          expense.receipts.reduce(
+                            (acc: string, curr: any, index: number) =>
+                              acc + index + ': ' + curr.url + '\n',
+                            ''
+                          )}
+                      </Text>
+                    </Flex>
+                  </Flex>
+                  <Flex
+                    justifyContent='space-between'
+                    padding='12px 10px'
+                    height='60px'
+                  >
+                    <Text>Comments: </Text>
+                  </Flex>
+
+                  <TextArea
+                    value={(expense && expense.comment) || text}
+                    onChange={changeText}
+                  />
+                </>
+              </TableWrapper>
+              <Flex justifyContent='space-between' padding='10px'>
+                <Button
+                  label='Save'
+                  intent='primary'
+                  onClick={saveHandler}
+                  width='200px'
+                />
+                <Button
+                  label='Back'
+                  intent='secondary'
+                  onClick={backHandler}
+                  width='200px'
+                />
+              </Flex>
             </Flex>
           )}
-          <Flex>
-            <textarea
-              placeholder='Leave a comment for this expense'
-              value={text}
-              onChange={e => changeText(e.target.value)}
-            />
-          </Flex>
-          <Flex>
-            <input
-              type='file'
-              name=''
-              id=''
-              onChange={event => changeFile(event.target.files[0])}
-            />
-          </Flex>
-          <Flex>
-            <Button label='Save' onClick={saveHandler} />
-          </Flex>
         </Flex>
       </Flex>
     </Flex>

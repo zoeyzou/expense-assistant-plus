@@ -21,6 +21,7 @@ const Text = styled.div<StyledComponentsProps & TextProps>`
   text-align: ${({ textAlign }) => textAlign || 'inherit'};
   color: ${({ color, theme }) => color || theme.color.black};
   background-color: ${({ backgroundColor }) => backgroundColor};
+  word-break: break-all;
 
   width: ${({ width }) => width};
   height: ${({ height }) => height};

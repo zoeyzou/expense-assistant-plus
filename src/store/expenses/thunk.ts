@@ -38,7 +38,7 @@ export const getExpensesThunk = (pageLimit: number, page: number) => (
         type: GET_EXPENSES_FAILURE,
         payload: {
           loadingState: 'failure',
-          error: err,
+          error: err.message,
         },
       });
     });
