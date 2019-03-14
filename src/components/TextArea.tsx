@@ -7,7 +7,7 @@ type TextAreaProps = StyledComponentsProps & {
   maxHeight?: string;
   placeholder?: string;
   value: string | number;
-  onChange: (value: string | number) => void;
+  onChange: (value: string) => void;
 };
 
 const _TextArea: React.FunctionComponent<TextAreaProps> = ({
