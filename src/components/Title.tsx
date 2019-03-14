@@ -6,19 +6,20 @@ import { StyledComponentsProps } from 'src/models/styled-components-props';
 import { theme } from 'src/utils/theme';
 
 type TitleProps = StyledComponentsProps & {
+  className?: string;
   children: React.ReactNode;
 };
 
-const _Title: React.FunctionComponent<TitleProps> = props => {
+const _Title: React.FunctionComponent<TitleProps> = ({className, children}) => {
   return (
-    <Flex height='auto' margin='15px 0'>
+    <Flex height='auto' margin='15px 0' className={className}>
       <Text
         color={theme.color.darkOrange}
         fontSize={theme.fontSize.lg}
         fontFamily={theme.font.title}
         fontWeight='bold'
       >
-        {props.children}
+        {children}
       </Text>
     </Flex>
   );
