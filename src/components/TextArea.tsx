@@ -5,10 +5,25 @@ import styled from 'src/utils/styled-components';
 type TextAreaProps = StyledComponentsProps & {
   maxWidth?: string;
   maxHeight?: string;
+  placeholder?: string;
+  value: string | number;
+  onChange: (value: string | number) => void;
 };
 
-const _TextArea: React.FunctionComponent<TextAreaProps> = props => {
-  return <textarea />;
+const _TextArea: React.FunctionComponent<TextAreaProps> = ({
+  placeholder,
+  value,
+  onChange,
+}) => {
+  return (
+    <textarea
+      placeholder={placeholder || 'Leave a comment for this expense'}
+      value={value}
+      onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
+        onChange(event.target.value)
+      }
+    />
+  );
 };
 
 const TextArea = styled(_TextArea)`
