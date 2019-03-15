@@ -80,6 +80,8 @@ const _TableContainer: React.FunctionComponent<TableContainerProps> = ({
 
   const changePageSize = (pageSize: number) => {
     setPageSize(pageSize);
+    // while changing page size, page should be initialized
+    setPage(1);
   };
 
   const columns: Column<Expense>[] = [
