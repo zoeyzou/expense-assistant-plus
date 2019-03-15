@@ -72,9 +72,19 @@ const _TableContainer: React.FunctionComponent<TableContainerProps> = ({
       pageSize={pageSize}
       showPageJump={false}
       PreviousComponent={() => (
-        <Button label='Previous' onClick={setPreviousPage} />
+        <Button
+          label='Previous'
+          onClick={setPreviousPage}
+          isDisabled={page === 1}
+        />
       )}
-      NextComponent={() => <Button label='Next' onClick={setNextPage} />}
+      NextComponent={() => (
+        <Button
+          label='Next'
+          onClick={setNextPage}
+          isDisabled={page === totalPages}
+        />
+      )}
       onPageSizeChange={changePageSize}
       getTrProps={(state: any, rowInfo?: RowInfo) => ({
         onClick: () =>
