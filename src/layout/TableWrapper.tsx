@@ -23,6 +23,8 @@ const _TableWrapper: React.FunctionComponent<TableWrapperProps> = ({
 const TableWrapper = styled(_TableWrapper)`
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
+  max-height: calc(300px + 10vh);
+  overflow-y: auto;
 
   & > :nth-of-type(odd) {
     background-color: ${({ theme }) => theme.color.lightWhite};
