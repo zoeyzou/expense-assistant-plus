@@ -6,6 +6,7 @@ type ButtonProps = StyledComponentsProps & {
   intent?: 'primary' | 'secondary';
   className?: string;
   label: string;
+  isDisabled?: boolean;
   onClick: () => void;
 };
 
@@ -13,10 +14,15 @@ const _Button: React.FunctionComponent<ButtonProps> = ({
   className,
   intent,
   label,
+  isDisabled,
   onClick,
 }) => {
   return (
-    <button className={`${className} ${intent}`} onClick={onClick}>
+    <button
+      className={`${className} ${intent} ${isDisabled && 'isDisabled'}`}
+      onClick={onClick}
+      disabled={isDisabled}
+    >
       {label}
     </button>
   );
@@ -52,6 +58,11 @@ const Button = styled(_Button)`
     &:hover {
       transition: all 0.2s ease;
       color: ${({ theme }) => theme.color.darkOrange};
+
+      &.isDisabled {
+        background: ${({ theme }) => theme.color.lightGrey};
+        color: ${({ theme }) => theme.color.white};
+      }
     }
   }
 
@@ -62,7 +73,19 @@ const Button = styled(_Button)`
       transition: all 0.2s ease;
       background: ${({ theme }) => theme.color.lightWhite};
       color: ${({ theme }) => theme.color.orange};
+
+      &.isDisabled {
+        background: ${({ theme }) => theme.color.lightGrey};
+        color: ${({ theme }) => theme.color.white};
+      }
     }
+  }
+
+  &.isDisabled {
+    cursor: not-allowed;
+    background: ${({ theme }) => theme.color.lightGrey};
+    border-color: ${({ theme }) => theme.color.lightGrey};
+    color: ${({ theme }) => theme.color.white};
   }
 `;
 
