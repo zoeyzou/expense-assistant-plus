@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Navigations from 'src/components/Navigations';
 import Logo from 'src/components/Logo';
-import { MenuWrapper } from 'src/components/MenuWrapper';
+import { MenuWrapper } from 'src/layout/MenuWrapper';
 import AvatarContainer from 'src/containers/AvatarContainer';
 
 const Menu: React.FunctionComponent<{}> = () => {

@@ -39,5 +39,6 @@ export const theme: Theme = {
     lightOrange: '#E9A784',
     semiTransparent: 'rgba(255, 255, 255, 0.6)',
     black: '#222222',
+    lightGrey: 'lightGrey',
   },
 };

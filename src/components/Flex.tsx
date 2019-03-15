@@ -5,6 +5,10 @@ export type FlexProps = {
   flexFlow?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   justifyContent?: string;
   alignItems?: string;
+  maxHeight?: string;
+  flex?: string;
+  overflowX?: string;
+  overflowY?: string;
 };
 
 const Flex = styled.div<StyledComponentsProps & FlexProps>`
@@ -12,6 +16,10 @@ const Flex = styled.div<StyledComponentsProps & FlexProps>`
   flex-flow: ${({ flexFlow }) => flexFlow || 'row'};
   justify-content: ${({ justifyContent }) => justifyContent || 'center'};
   align-items: ${({ alignItems }) => alignItems || 'center'};
+  max-height: ${({ maxHeight }) => maxHeight};
+  flex: ${({ flex }) => flex};
+  overflow-x: ${({ overflowX }) => overflowX};
+  overflow-y: ${({ overflowY }) => overflowY};
 
   width: ${({ width }) => width || '100%'};
   height: ${({ height }) => height};

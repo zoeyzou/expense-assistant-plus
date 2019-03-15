@@ -10,6 +10,7 @@ type TextProps = {
   display?: string;
   color?: string;
   backgroundColor?: string;
+  flex?: string;
 };
 
 const Text = styled.div<StyledComponentsProps & TextProps>`
@@ -21,6 +22,7 @@ const Text = styled.div<StyledComponentsProps & TextProps>`
   text-align: ${({ textAlign }) => textAlign || 'inherit'};
   color: ${({ color, theme }) => color || theme.color.black};
   background-color: ${({ backgroundColor }) => backgroundColor};
+  flex: ${({ flex }) => flex};
   word-break: break-all;
 
   width: ${({ width }) => width};

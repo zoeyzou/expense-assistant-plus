@@ -7,7 +7,7 @@ type TextAreaProps = StyledComponentsProps & {
   maxWidth?: string;
   maxHeight?: string;
   placeholder?: string;
-  value: string | number;
+  value: string | number | undefined;
   onChange: (value: string) => void;
 };
 

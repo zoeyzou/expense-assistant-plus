@@ -1,21 +1,18 @@
 import * as React from 'react';
-import ReactTable, { Filter, RowInfo, Column } from 'react-table';
+import ReactTable, { RowInfo } from 'react-table';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { AppState } from 'src/store';
 import { getExpensesThunk } from 'src/store/expenses/thunk';
 import { Expense } from 'src/models/expense';
 import 'react-table/react-table.css';
-import Flex from 'src/components/Flex';
 import { getTotalPages } from 'src/store/page-info/selectors';
 import { LoadingState } from 'src/models/loading-state';
 import { SET_PAGE, SET_PAGE_LIMIT } from 'src/store/page-info/types';
 import Button from 'src/components/Button';
-import TextInput from 'src/components/TextInput';
-import ViewIcon from 'src/components/Icons/ViewIcon';
-import { theme } from 'src/utils/theme';
 import { withRouter, RouteComponentProps } from 'react-router';
 import styled from 'src/utils/styled-components';
+import { expensesColumns } from 'src/utils/table-columns';
 
 type TableContainerProps = RouteComponentProps<any> & {
   className?: string;
@@ -47,25 +44,6 @@ const _TableContainer: React.FunctionComponent<TableContainerProps> = ({
     getExpenses(pageSize, page);
   }, [pageSize, page]);
 
-  const filterName = (filter: Filter, row: any) => {
-    const id: string = filter.id;
-    return row[id] !== undefined
-      ? String(row[id])
-          .toLowerCase()
-          .includes(filter.value.toLowerCase())
-      : true;
-  };
-
-  const filterCurrency = (filter: Filter, row: any) => {
-    const id: string = filter.id;
-
-    return filter.value !== 'all'
-      ? String(row[id])
-          .toLowerCase()
-          .includes(filter.value.toLowerCase())
-      : true;
-  };
-
   const setPreviousPage = () => {
     if (page > 1) {
       setPage(page - 1);
@@ -80,73 +58,9 @@ const _TableContainer: React.FunctionComponent<TableContainerProps> = ({
 
   const changePageSize = (pageSize: number) => {
     setPageSize(pageSize);
+    // while changing page size, page should be initialized
+    setPage(1);
   };
-
-  const columns: Column<Expense>[] = [
-    {
-      id: 'index',
-      Header: 'Index',
-      accessor: (data: Expense) => data.index + 1,
-      filterable: false,
-      width: 65,
-    },
-    {
-      id: 'date',
-      Header: 'Date',
-      accessor: (data: Expense) => data.date && data.date.slice(0, 10),
-      filterable: false,
-      width: 100,
-    },
-    {
-      id: 'employee',
-      Header: 'Employee',
-      accessor: (data: Expense) =>
-        data.user && `${data.user.first} ${data.user.last}`,
-      filterMethod: filterName,
-      Filter: ({ filter, onChange }) => (
-        <TextInput
-          onChange={value => onChange(value)}
-          defaultValue={filter ? filter.value : ''}
-          placeholder='Search'
-          height='100%'
-          width='100%'
-        />
-      ),
-    },
-    {
-      id: 'amount',
-      Header: 'Amount',
-      accessor: (data: Expense) =>
-        data.amount && `${data.amount.value}${data.amount.currency}`,
-      width: 130,
-      filterMethod: filterCurrency,
-      Filter: ({ filter, onChange }) => (
-        <select
-          onChange={event => onChange(event.target.value)}
-          style={{ width: '100%' }}
-          value={filter ? filter.value : 'all'}
-        >
-          <option value='all'>Show All</option>
-          <option value='EUR'>EUR</option>
-          <option value='GBP'>GBP</option>
-          <option value='DKK'>DKK</option>
-        </select>
-      ),
-    },
-    {
-      id: 'more',
-      Header: 'More',
-      Cell: 'More',
-
-      filterable: false,
-      accessor: (data: Expense) => (
-        <Flex>
-          <ViewIcon color={theme.color.orange} />
-        </Flex>
-      ),
-      minWidth: 50,
-    },
-  ];
 
   return (
     <ReactTable
@@ -154,13 +68,23 @@ const _TableContainer: React.FunctionComponent<TableContainerProps> = ({
       loading={loadingState === 'pending'}
       data={expenses}
       filterable
-      columns={columns}
+      columns={expensesColumns}
       pageSize={pageSize}
       showPageJump={false}
       PreviousComponent={() => (
-        <Button label='Previous' onClick={setPreviousPage} />
+        <Button
+          label='Previous'
+          onClick={setPreviousPage}
+          isDisabled={page === 1}
+        />
       )}
-      NextComponent={() => <Button label='Next' onClick={setNextPage} />}
+      NextComponent={() => (
+        <Button
+          label='Next'
+          onClick={setNextPage}
+          isDisabled={page === totalPages}
+        />
+      )}
       onPageSizeChange={changePageSize}
       getTrProps={(state: any, rowInfo?: RowInfo) => ({
         onClick: () =>

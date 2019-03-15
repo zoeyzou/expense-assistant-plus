@@ -18,7 +18,7 @@ export default class App extends React.Component<AppProps, any> {
         <GlobalStyle />
         <React.Suspense
           fallback={
-            <Flex>
+            <Flex height='100%'>
               <Loader />
             </Flex>
           }

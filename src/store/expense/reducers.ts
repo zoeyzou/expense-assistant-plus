@@ -12,16 +12,6 @@ export const expenseReducer = (
         ...state,
         ...{ currentExpenseId: action.payload.id },
       };
-    case 'SET_COMMENT':
-      return {
-        ...state,
-        ...{ comment: action.payload.comment },
-      };
-    case 'SET_FILE':
-      return {
-        ...state,
-        ...{ file: action.payload.file },
-      };
     case 'GET_EXPENSE_REQUEST':
     case 'SAVE_EXPENSE_REQUEST':
       return {

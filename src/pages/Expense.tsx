@@ -6,11 +6,7 @@ import { RouteComponentProps } from 'react-router';
 import { AppState } from 'src/store';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  SET_CURRENT_EXPENSE_ID,
-  SET_COMMENT,
-  SET_FILE,
-} from 'src/store/expense/types';
+import { SET_CURRENT_EXPENSE_ID } from 'src/store/expense/types';
 import {
   getExpenseThunk,
   saveCommentThunk,
@@ -24,10 +20,13 @@ import Button from 'src/components/Button';
 import FileUploader from 'src/components/FileUploader';
 import TextArea from 'src/components/TextArea';
 import { theme } from 'src/utils/theme';
-import TableWrapper from 'src/components/TableWrapper';
+import TableWrapper from 'src/layout/TableWrapper';
+import CardWrapper from 'src/layout/CardWrapper';
+import TwoColumnRow from 'src/layout/TwoColumnRow';
+import { reduceArrayOfObjectsToIndexedString } from 'src/utils/helpers';
 
 type ExpenseProps = RouteComponentProps & {
-  expense?: Expense;
+  expense: Expense;
   loadingState: LoadingState;
   setExpenseId: (id: string) => void;
   getExpense: (id: string) => void;
@@ -47,6 +46,10 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
   history,
 }) => {
   const id: string = match && match.params && match.params.id;
+  const [text, changeText] = React.useState<string | undefined>(
+    expense && expense.comment
+  );
+  const [files, changeFiles] = React.useState<FileList | null>(null);
 
   React.useEffect(() => {
     if (id) setExpenseId(id);
@@ -54,13 +57,19 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
     getExpense(id);
   }, []);
 
-  const [text, changeText] = React.useState<string>('');
-
-  const [files, changeFiles] = React.useState<FileList | null>(null);
+  React.useEffect(() => {
+    if (expense) {
+      changeText(expense.comment);
+    }
+  }, [expense]);
 
   const saveHandler = () => {
-    saveComment(id, text);
-    saveReceipt(id, files && files[0]);
+    if (text) {
+      saveComment(id, text);
+    }
+    if (files) {
+      saveReceipt(id, files && files[0]);
+    }
   };
 
   const backHandler = () => {
@@ -68,121 +77,110 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
   };
 
   return (
-    <Flex padding='calc(20px + 3vh) calc(20px + 5vw)' height='100%'>
-      <Flex
-        style={{ backgroundColor: 'rgba(255, 255, 255, 0.6)' }}
-        height='100%'
-      >
-        <Flex flexFlow='column' padding='2% 10%'>
-          <Title>Expense Details</Title>
-          {loadingState === 'pending' ? (
-            <Loader />
-          ) : (
-            <Flex flexFlow='column'>
-              <Flex
-                justifyContent='space-between'
-                height='auto'
-                margin='5px auto'
-              >
-                <Text color={theme.color.orange} fontWeight='bolder'>
-                  {expense && expense.date.slice(0, 10)}
-                </Text>
-                <Text color={theme.color.orange} fontWeight='bolder'>
-                  {expense && expense.user.first} {expense && expense.user.last}
-                </Text>
-              </Flex>
-              <TableWrapper flexFlow='column'>
-                <>
-                  <Flex
-                    justifyContent='space-between'
-                    padding='12px 10px'
-                    height='60px'
-                  >
-                    <Text style={{ flexBasis: '50%' }}>
-                      Category: {(expense && expense.category) || 'N/A'}
-                    </Text>
-                    <Text style={{ flexBasis: '50%' }}>
-                      Email: {(expense && expense.user.email) || 'N/A'}
-                    </Text>
-                  </Flex>
-                  <Flex
-                    justifyContent='space-between'
-                    padding='12px 10px'
-                    height='60px'
-                  >
-                    <Text style={{ flexBasis: '50%' }}>
-                      Merchant: {(expense && expense.merchant) || 'N/A'}
-                    </Text>
-                    <Text style={{ flexBasis: '50%' }}>
-                      Amount:{' '}
-                      {`${expense && expense.amount.value}${expense &&
-                        expense.amount.currency}` || 'N/A'}
-                    </Text>
-                  </Flex>
-                  <Flex
-                    justifyContent='space-between'
-                    padding='12px 10px'
-                    height='60px'
-                  >
-                    <Flex
-                      justifyContent='flex-start'
-                      style={{ flexBasis: '50%' }}
-                    >
-                      <Text>Receipts: </Text>
-                      <FileUploader
-                        label={files !== null ? files[0].name : 'Choose a file'}
-                        onChange={changeFiles}
-                        margin='0 10px'
-                      />
-                    </Flex>
-                    <Flex
-                      justifyContent='flex-start'
-                      style={{ flexBasis: '50%' }}
-                    >
-                      <Text fontSize={theme.fontSize.sm}>
-                        {expense &&
-                          expense.receipts.length > 0 &&
-                          expense.receipts.reduce(
-                            (acc: string, curr: any, index: number) =>
-                              acc + index + ': ' + curr.url + '\n',
-                            ''
-                          )}
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Flex
-                    justifyContent='space-between'
-                    padding='12px 10px'
-                    height='60px'
-                  >
-                    <Text>Comments: </Text>
-                  </Flex>
+    <CardWrapper>
+      {/* title row */}
+      <Title>Expense Details</Title>
 
-                  <TextArea
-                    value={(expense && expense.comment) || text}
-                    onChange={changeText}
-                  />
-                </>
-              </TableWrapper>
-              <Flex justifyContent='space-between' padding='10px'>
-                <Button
-                  label='Save'
-                  intent='primary'
-                  onClick={saveHandler}
-                  width='200px'
-                />
-                <Button
-                  label='Back'
-                  intent='secondary'
-                  onClick={backHandler}
-                  width='200px'
-                />
-              </Flex>
-            </Flex>
-          )}
-        </Flex>
-      </Flex>
-    </Flex>
+      {loadingState === 'pending' ? (
+        <Loader />
+      ) : (
+        expense && (
+          <Flex flexFlow='column'>
+            {/* date and user name row */}
+            <TwoColumnRow
+              padding='0'
+              margin='5px auto'
+              height='auto'
+              flex='initial'
+            >
+              <>
+                <Text color={theme.color.orange} fontWeight='bolder'>
+                  {expense.date.slice(0, 10)}
+                </Text>
+                <Text color={theme.color.orange} fontWeight='bolder'>
+                  {expense.user.first} {expense.user.last}
+                </Text>
+              </>
+            </TwoColumnRow>
+
+            {/* table content */}
+            <TableWrapper flexFlow='column'>
+              <>
+                <TwoColumnRow>
+                  <>
+                    <Text>Category: {expense.category || 'N/A'}</Text>
+                    <Text>Email: {expense.user.email || 'N/A'}</Text>
+                  </>
+                </TwoColumnRow>
+
+                <TwoColumnRow>
+                  <>
+                    <Text>Merchant: {expense.merchant || 'N/A'}</Text>
+                    <Text>
+                      Amount:{' '}
+                      {`${expense.amount.value}${expense.amount.currency}` ||
+                        'N/A'}
+                    </Text>
+                  </>
+                </TwoColumnRow>
+
+                <TwoColumnRow height='auto'>
+                  {/* file uploader row */}
+                  <Flex
+                    justifyContent='flex-start'
+                    style={{ flexBasis: '50%' }}
+                  >
+                    <Text>Receipts: </Text>
+                    <FileUploader
+                      label={files !== null ? files[0].name : 'Choose a file'}
+                      onChange={changeFiles}
+                      margin='0 10px'
+                    />
+                  </Flex>
+                  {/* files uploaded before */}
+                  <Flex
+                    justifyContent='flex-start'
+                    alignItems='flex-start'
+                    flex='1 1 50%'
+                    maxHeight='100px'
+                    overflowY='auto'
+                  >
+                    <Text fontSize={theme.fontSize.sm}>
+                      {expense.receipts.length > 0 &&
+                        reduceArrayOfObjectsToIndexedString(expense.receipts)}
+                    </Text>
+                  </Flex>
+                </TwoColumnRow>
+
+                {/* comments */}
+                <TwoColumnRow>
+                  <Text>Comments: </Text>
+                </TwoColumnRow>
+
+                <TextArea value={text} onChange={changeText} />
+              </>
+            </TableWrapper>
+
+            {/* footer */}
+            <TwoColumnRow padding='10px' flex='initial'>
+              <Button
+                label='Save'
+                intent='primary'
+                onClick={saveHandler}
+                width='200px'
+                isDisabled={!text && !files}
+              />
+              <Button
+                label='Back'
+                intent='secondary'
+                onClick={backHandler}
+                width='200px'
+              />
+            </TwoColumnRow>
+          </Flex>
+        )
+      )}
+    </CardWrapper>
   );
 };
 
@@ -204,21 +202,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
     dispatch(getExpenseThunk(id));
   },
   saveComment: (id: string, comment: string) => {
-    dispatch({
-      type: SET_COMMENT,
-      payload: {
-        comment: comment,
-      },
-    });
     dispatch(saveCommentThunk(id, comment));
   },
   saveReceipt: (id: string, file: any) => {
-    dispatch({
-      type: SET_FILE,
-      payload: {
-        file: file,
-      },
-    });
     dispatch(saveFileThunk(id, file));
   },
 });
