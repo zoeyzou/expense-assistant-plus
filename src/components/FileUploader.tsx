@@ -18,8 +18,7 @@ const _FileUploader: React.FunctionComponent<FileUploaderProps> = ({
   onChange,
 }) => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target);
-    event.currentTarget && onChange(event.currentTarget.files);
+    onChange(event.currentTarget.files);
   };
   return (
     <>
