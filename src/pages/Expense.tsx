@@ -6,11 +6,7 @@ import { RouteComponentProps } from 'react-router';
 import { AppState } from 'src/store';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  SET_CURRENT_EXPENSE_ID,
-  SET_COMMENT,
-  SET_FILE,
-} from 'src/store/expense/types';
+import { SET_CURRENT_EXPENSE_ID } from 'src/store/expense/types';
 import {
   getExpenseThunk,
   saveCommentThunk,
@@ -68,8 +64,12 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
   }, [expense]);
 
   const saveHandler = () => {
-    saveComment(id, text);
-    saveReceipt(id, files && files[0]);
+    if (text) {
+      saveComment(id, text);
+    }
+    if (files) {
+      saveReceipt(id, files && files[0]);
+    }
   };
 
   const backHandler = () => {
@@ -78,12 +78,15 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
 
   return (
     <CardWrapper>
+      {/* title row */}
       <Title>Expense Details</Title>
+
       {loadingState === 'pending' ? (
         <Loader />
       ) : (
         expense && (
           <Flex flexFlow='column'>
+            {/* date and user name row */}
             <TwoColumnRow
               padding='0'
               margin='5px auto'
@@ -99,6 +102,8 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
                 </Text>
               </>
             </TwoColumnRow>
+
+            {/* table content */}
             <TableWrapper flexFlow='column'>
               <>
                 <TwoColumnRow>
@@ -107,6 +112,7 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
                     <Text>Email: {expense.user.email || 'N/A'}</Text>
                   </>
                 </TwoColumnRow>
+
                 <TwoColumnRow>
                   <>
                     <Text>Merchant: {expense.merchant || 'N/A'}</Text>
@@ -117,7 +123,9 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
                     </Text>
                   </>
                 </TwoColumnRow>
+
                 <TwoColumnRow height='auto'>
+                  {/* file uploader row */}
                   <Flex
                     justifyContent='flex-start'
                     style={{ flexBasis: '50%' }}
@@ -129,9 +137,13 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
                       margin='0 10px'
                     />
                   </Flex>
+                  {/* files uploaded before */}
                   <Flex
                     justifyContent='flex-start'
-                    style={{ flexBasis: '50%' }}
+                    alignItems='flex-start'
+                    flex='1 1 50%'
+                    maxHeight='100px'
+                    overflowY='auto'
                   >
                     <Text fontSize={theme.fontSize.sm}>
                       {expense.receipts.length > 0 &&
@@ -139,6 +151,8 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
                     </Text>
                   </Flex>
                 </TwoColumnRow>
+
+                {/* comments */}
                 <TwoColumnRow>
                   <Text>Comments: </Text>
                 </TwoColumnRow>
@@ -146,6 +160,8 @@ const ExpensePage: React.FunctionComponent<ExpenseProps> = ({
                 <TextArea value={text} onChange={changeText} />
               </>
             </TableWrapper>
+
+            {/* footer */}
             <TwoColumnRow padding='10px' flex='initial'>
               <Button
                 label='Save'
@@ -186,21 +202,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
     dispatch(getExpenseThunk(id));
   },
   saveComment: (id: string, comment: string) => {
-    // dispatch({
-    //   type: SET_COMMENT,
-    //   payload: {
-    //     comment: comment,
-    //   },
-    // });
     dispatch(saveCommentThunk(id, comment));
   },
   saveReceipt: (id: string, file: any) => {
-    // dispatch({
-    //   type: SET_FILE,
-    //   payload: {
-    //     file: file,
-    //   },
-    // });
     dispatch(saveFileThunk(id, file));
   },
 });
