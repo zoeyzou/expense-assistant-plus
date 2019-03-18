@@ -22,7 +22,6 @@ export const getExpensesThunk = (pageLimit: number, page: number) => (
 
   loadExpenses(pageLimit, offset)
     .then((expenses: ExpenseList) => {
-      console.log(expenses);
       dispatch({
         type: GET_EXPENSES_SUCCESS,
         payload: {
@@ -33,7 +32,6 @@ export const getExpensesThunk = (pageLimit: number, page: number) => (
       });
     })
     .catch((err: any) => {
-      console.log(err);
       dispatch({
         type: GET_EXPENSES_FAILURE,
         payload: {

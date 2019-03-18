@@ -23,7 +23,6 @@ export const getExpenseThunk = (id: string) => (
 
   loadExpenseById(id)
     .then((expense: Expense) => {
-      console.log(expense);
       dispatch({
         type: GET_EXPENSE_SUCCESS,
         payload: {
@@ -33,7 +32,6 @@ export const getExpenseThunk = (id: string) => (
       });
     })
     .catch((err: any) => {
-      console.log(err);
       dispatch({
         type: GET_EXPENSE_FAILURE,
         payload: {
@@ -56,7 +54,6 @@ export const saveCommentThunk = (id: string, comment: string) => (
 
   saveComment(id, comment)
     .then((expense: Expense) => {
-      console.log('add comment', expense);
       dispatch({
         type: SAVE_EXPENSE_SUCCESS,
         payload: {
@@ -66,7 +63,6 @@ export const saveCommentThunk = (id: string, comment: string) => (
       });
     })
     .catch((err: any) => {
-      console.log(err);
       dispatch({
         type: SAVE_EXPENSE_FAILURE,
         payload: {
@@ -89,7 +85,6 @@ export const saveFileThunk = (id: string, file: any) => (
 
   saveReceipt(id, file)
     .then((expense: Expense) => {
-      console.log('add file', expense);
       dispatch({
         type: SAVE_EXPENSE_SUCCESS,
         payload: {
@@ -99,7 +94,6 @@ export const saveFileThunk = (id: string, file: any) => (
       });
     })
     .catch((err: any) => {
-      console.log(err);
       dispatch({
         type: SAVE_EXPENSE_FAILURE,
         payload: {

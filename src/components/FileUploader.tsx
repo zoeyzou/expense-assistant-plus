@@ -27,7 +27,6 @@ const _FileUploader: React.FunctionComponent<FileUploaderProps> = ({
         type='file'
         name='file-1'
         id='file-1'
-        onClick={() => console.log('clicked')}
         onChange={changeHandler}
         multiple={supportMultiple}
       />
